@@ -40,7 +40,7 @@ const newQuote = () => {
 // Get Quotes From API
 const fetchQuotes = async () => {
   loading();
-  const apiUrl = "httpsss://type.fit/api/quotes";
+  const apiUrl = "https://type.fit/api/quotes";
   try {
     const res = await fetch(apiUrl);
     quotes = await res.json();
