@@ -9,9 +9,9 @@ let quote = {
   author: "Buddha",
 };
 
-newQuoteButton.addEventListener("click", () => {
-  newQuote();
-});
+newQuoteButton.addEventListener("click", () => newQuote());
+
+twitterButton.addEventListener("click", () => tweetQuote());
 
 // Show New Quote
 const newQuote = () => {
@@ -52,6 +52,12 @@ const styleLengthyQuote = (quoteElement) =>
   quoteElement.innerText.length > 100
     ? quoteElement.classList.add("long-quote")
     : quoteElement.classList.remove("long-quote");
+
+// Tweet Quote
+const tweetQuote = () => {
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteEl.innerText} - ${authorEl.innerText}`;
+  window.open(twitterUrl, "_blank");
+};
 
 // On Load
 fetchQuotes().then(() => {
