@@ -2,6 +2,8 @@ const quoteEl = document.getElementById("quote");
 const authorEl = document.getElementById("author");
 const newQuoteButton = document.getElementById("new-quote");
 const twitterButton = document.getElementById("twitter");
+const loaderEl = document.getElementById("loader");
+const quoteContainer = document.getElementById("quote-container");
 
 let quotes = [];
 let quote = {
@@ -9,13 +11,13 @@ let quote = {
   author: "Buddha",
 };
 
+// Event Listeners
 newQuoteButton.addEventListener("click", () => newQuote());
-
 twitterButton.addEventListener("click", () => tweetQuote());
 
 // Show New Quote
 const newQuote = () => {
-  console.log("triggered");
+  loading();
   try {
     if (quotes.length === 0) {
       // Get Quotes Locally
@@ -30,6 +32,7 @@ const newQuote = () => {
     styleLengthyQuote(quoteEl);
     authorEl.innerText =
       quote.author === null ? "- Unknown" : `- ${quote.author}`;
+    loadingComplete();
   } catch (err) {
     console.log(err);
   }
@@ -37,11 +40,13 @@ const newQuote = () => {
 
 // Get Quotes From API
 const fetchQuotes = async () => {
+  loading();
   console.log("triggered REQUEST");
   const apiUrl = "httpsss://type.fit/api/quotes";
   try {
     const res = await fetch(apiUrl);
     quotes = await res.json();
+    loadingComplete();
     console.log("REQUEST MADE");
   } catch (err) {
     console.log(err);
@@ -57,6 +62,18 @@ const styleLengthyQuote = (quoteElement) =>
 const tweetQuote = () => {
   const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteEl.innerText} - ${authorEl.innerText}`;
   window.open(twitterUrl, "_blank");
+};
+
+// Show Loader
+const loading = () => {
+  loaderEl.hidden = false;
+  quoteContainer.hidden = true;
+};
+
+// Hide Loader
+const loadingComplete = () => {
+  loaderEl.hidden = true;
+  quoteContainer.hidden = false;
 };
 
 // On Load
