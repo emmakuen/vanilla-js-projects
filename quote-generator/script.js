@@ -22,7 +22,6 @@ const newQuote = () => {
     if (quotes.length === 0) {
       // Get Quotes Locally
       quotes = localQuotes;
-      console.log("LOCALLY LOADED");
     }
     while (quote.text == quoteEl.innerText) {
       let newIndex = Math.floor(Math.random() * quotes.length);
@@ -41,13 +40,11 @@ const newQuote = () => {
 // Get Quotes From API
 const fetchQuotes = async () => {
   loading();
-  console.log("triggered REQUEST");
   const apiUrl = "httpsss://type.fit/api/quotes";
   try {
     const res = await fetch(apiUrl);
     quotes = await res.json();
     loadingComplete();
-    console.log("REQUEST MADE");
   } catch (err) {
     console.log(err);
   }
