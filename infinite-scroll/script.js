@@ -1,6 +1,9 @@
 const imgContainer = document.getElementById("image-container");
 const loader = document.getElementById("loader");
 
+let loadMore = false;
+let loaded = 0;
+
 // Get photos from Unsplash API
 const getPhotos = async () => {
   try {
@@ -28,6 +31,10 @@ const displayPhotos = (photos) => {
       alt: photo.alt_description,
       title: photo.alt_description,
     });
+
+    // Event Listener, check when each is finished loading
+    imageEl.addEventListener("load", imageLoaded);
+
     // Put <img> inside <a>, put poth inside imgContainer
     linkEl.appendChild(imageEl);
     imgContainer.appendChild(linkEl);
@@ -40,6 +47,26 @@ const setAttributes = (element, attributes) => {
     element.setAttribute(key, attributes[key]);
   }
 };
+
+// Check if all images where loaded
+const imageLoaded = () => {
+  loaded++;
+  if (loaded === imgContainer.childElementCount) {
+    loadMore = true;
+    loader.hidden = true;
+  }
+};
+
+// Check if scrolling near bottom of page, then load more photos
+window.addEventListener("scroll", () => {
+  if (
+    window.innerHeight + window.scrollY > document.body.offsetHeight - 1000 &&
+    loadMore
+  ) {
+    loadMore = false;
+    getPhotos().then((photos) => displayPhotos(photos));
+  }
+});
 
 // On Load
 getPhotos().then((photos) => displayPhotos(photos));
