@@ -26,4 +26,4 @@ buttonEl.addEventListener("click", () => {
 });
 
 // On Load
-getJoke().then(showJoke);
+// getJoke().then(showJoke);
