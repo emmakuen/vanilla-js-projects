@@ -1,0 +1,121 @@
+/* GIF by Robin Davey on giphy.com */
+/* https://media1.giphy.com/media/xT9IgtvpVTzG3mDdVS/giphy.gif?cid=ecf05e470ey9fpiltj86gsp28k82odj66drzgrmw659iu416&rid=giphy.gif&ct=g */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,500;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ff3f4f;
+    font-family: 'Open Sans', sans-serif;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    height: 100vh;
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #fff;
+    border: 2px solid #fff;
+    background: none;
+    position: relative;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #286bcd;
+    border: 2px solid #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.3);
+    background-color: #285fb1;
+}
+
+button:disabled {
+    cursor: default;
+    background-color: #676869af;
+}
+
+.joke-container {
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.joke {
+    color: white;
+    font-size: 1.5rem;
+    line-height: 2;
+    background-color: rgba(243, 182, 15, 0.1);
+    padding: 0.5rem 2rem;
+    border-radius: 20px;
+    border: 1px rgba(255, 255, 255, 0.4) solid;
+    margin: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.gif-container {
+    height: 100vh;
+    width: 50vw;
+    /* contain--> Scales the image as large as possible within its container without crop or stretch. */
+    background: url('https://media1.giphy.com/media/xT9IgtvpVTzG3mDdVS/giphy.gif?cid=ecf05e470ey9fpiltj86gsp28k82odj66drzgrmw659iu416&rid=giphy.gif&ct=g');
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Media Query: Tablet or Smaller */
+@media screen and (max-width: 1000px) {
+    body {
+        overflow-y: scroll;
+    }
+
+    .container {
+        background-position: center center;
+        background-size: cover;
+        flex-direction: column-reverse;
+    }
+
+    .gif-container,
+    .joke-container {
+        width: 90vw;
+        height: 100%;
+    }
+
+    .joke {
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+}
